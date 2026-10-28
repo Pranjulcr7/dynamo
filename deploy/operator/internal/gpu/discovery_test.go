@@ -67,6 +67,7 @@ func TestGPUDiscovery_TotalGPUs(t *testing.T) {
 				wantSelected int
 			}{
 				{name: "different node sizes", h100Counts: []int{8, 4}, wantSKU: "h100_sxm", wantPerNode: 8, wantNodes: 2, wantTotal: 12, wantSelected: 8},
+				{name: "maximum selected after smaller node", h100Counts: []int{4, 8}, wantSKU: "h100_sxm", wantPerNode: 8, wantNodes: 2, wantTotal: 12, wantSelected: 8},
 				{name: "same selected shape", h100Counts: []int{8, 8}, wantSKU: "h100_sxm", wantPerNode: 8, wantNodes: 2, wantTotal: 16, wantSelected: 16},
 				{name: "different VRAM per GPU", h100Counts: []int{8, 8}, h100VRAM: []int{81920, 40960}, wantSKU: "h100_sxm", wantPerNode: 8, wantNodes: 2, wantTotal: 16, wantSelected: 8},
 				{name: "unknown models remain separate GPU types", h100Counts: []int{8, 8}, h100Models: []string{"FutureGPU-A", "FutureGPU-B"}, wantPerNode: 8, wantNodes: 1, wantTotal: 8, wantSelected: 8},
